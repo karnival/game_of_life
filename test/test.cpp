@@ -101,3 +101,21 @@ TEST_CASE( "grid cell-setters and cell-getters work as expected", "[grid]" ) {
     b.set_cell_state(1, 0, true);
     REQUIRE(b.get_cell_state(1, 0));
 }
+
+TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
+    Grid a(3,3);
+
+    a.set_cell_state(0, 0, false);
+    a.set_cell_state(0, 1, true );
+    a.set_cell_state(0, 2, false);
+    a.set_cell_state(1, 0, true );
+    a.set_cell_state(1, 1, false);
+    a.set_cell_state(1, 2, true );
+    a.set_cell_state(2, 0, false);
+    a.set_cell_state(2, 1, true );
+    a.set_cell_state(2, 2, false);
+
+    auto neighbours = a.get_neighbours_state(1, 1);
+    auto expected_neighbours = std::vector<bool>( {0, 1, 0, 1, 1, 0, 1, 0} );
+    REQUIRE(neighbours==expected_neighbours);
+}
