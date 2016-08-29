@@ -1,1 +1,1 @@
-add_executable(game_of_life main.cpp)
+add_executable(game_of_life main.cpp cell.cpp)
