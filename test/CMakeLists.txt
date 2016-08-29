@@ -1,1 +1,1 @@
-add_executable(test test.cpp ${PROJECT_SOURCE_DIR}/src/cell.cpp)
+add_executable(test test.cpp ${PROJECT_SOURCE_DIR}/src/grid.cpp ${PROJECT_SOURCE_DIR}/src/cell.cpp)

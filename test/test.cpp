@@ -2,6 +2,7 @@
 #include "catch.hpp"
 
 #include <cell.hpp>
+#include <grid.hpp>
 
 TEST_CASE( "cells can be killed and restored", "[cell]" ) {
     Cell a;
@@ -22,4 +23,11 @@ TEST_CASE( "cells can be killed and restored", "[cell]" ) {
         REQUIRE(!b.is_alive());
         REQUIRE(c.is_alive());
     }
+}
+
+TEST_CASE( "grids can be created", "[grid]" ) {
+    Grid a(10,5);
+
+    REQUIRE(a.num_rows() == 10);
+    REQUIRE(a.num_cols() == 5);
 }
