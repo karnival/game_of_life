@@ -1,4 +1,6 @@
 #include <vector>
+#include <exception>
+#include <iostream>
 
 #include <grid.hpp>
 
@@ -17,20 +19,57 @@ std::vector<bool> Grid::get_neighbours_state(int row, int col) {
     auto rows = num_rows();
     auto cols = num_cols();
 
-    auto neighbours = std::vector<bool>(8, 0); 
-    
-    if(row > 0 && row < rows-1 && col > 0 && col < cols-1) {
-        neighbours[0] = GridData[row-1][col-1].is_alive();
-        neighbours[1] = GridData[row  ][col-1].is_alive();
-        neighbours[2] = GridData[row+1][col-1].is_alive();
-
-        neighbours[3] = GridData[row-1][col  ].is_alive();
-        neighbours[4] = GridData[row+1][col  ].is_alive();
-
-        neighbours[5] = GridData[row-1][col+1].is_alive();
-        neighbours[6] = GridData[row  ][col+1].is_alive();
-        neighbours[7] = GridData[row+1][col+1].is_alive();
+    // Compute the row offsets and col offsets -- handles edge/corner cases.
+    int row_dec;
+    int row_inc; 
+    if(row > 0 && row < rows-1) {
+         row_dec = row-1;
+         row_inc = row+1;
     }
+    else if(row == 0) {
+         row_dec = rows-1;
+         row_inc = row+1;
+    }
+    else if(row == rows-1) {
+         row_dec = row-1;
+         row_inc = 0;
+    }
+    else {
+        std::cerr << "Bad row coordinate in neighbour lookup." << std::endl;
+        throw std::exception();
+    }
+
+    int col_dec;
+    int col_inc;
+    if(col > 0 && col < cols-1) {
+         col_dec = col-1;
+         col_inc = col+1;
+    }
+    else if(col == 0) {
+         col_dec = cols-1;
+         col_inc = col+1;
+    }
+    else if(col == cols-1) {
+         col_dec = col-1;
+         col_inc = 0;
+    }
+    else {
+        std::cerr << "Bad col coordinate in neighbour lookup." << std::endl;
+        throw std::exception();
+    }
+
+    auto neighbours = std::vector<bool>(8, 0); 
+    neighbours[0] = GridData[row_dec][col_dec].is_alive();
+    neighbours[1] = GridData[row  ][col_dec].is_alive();
+    neighbours[2] = GridData[row_inc][col_dec].is_alive();
+
+    neighbours[3] = GridData[row_dec][col].is_alive();
+    neighbours[4] = GridData[row_inc][col].is_alive();
+
+    neighbours[5] = GridData[row_dec][col_inc].is_alive();
+    neighbours[6] = GridData[row  ][col_inc].is_alive();
+    neighbours[7] = GridData[row_inc][col_inc].is_alive();
+
 
     return neighbours;
 }

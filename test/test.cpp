@@ -115,7 +115,39 @@ TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
     a.set_cell_state(2, 1, true );
     a.set_cell_state(2, 2, false);
 
-    auto neighbours = a.get_neighbours_state(1, 1);
-    auto expected_neighbours = std::vector<bool>( {0, 1, 0, 1, 1, 0, 1, 0} );
-    REQUIRE(neighbours==expected_neighbours);
+    SECTION( "middle cell's neighbours" ) {
+        auto neighbours = a.get_neighbours_state(1, 1);
+        auto expected_neighbours = std::vector<bool>( {0, 1, 0, 1, 1, 0, 1, 0} );
+        REQUIRE(neighbours==expected_neighbours);
+    }
+
+    SECTION( "low edge cell's neighbours" ) {
+        auto neighbours = a.get_neighbours_state(0, 1);
+        auto expected_neighbours = std::vector<bool>( {0, 0, 1, 1, 0, 0, 0, 1} );
+        REQUIRE(neighbours==expected_neighbours);
+    }
+
+    SECTION( "high edge cell's neighbours" ) {
+        auto neighbours = a.get_neighbours_state(2, 1);
+        auto expected_neighbours = std::vector<bool>( {1, 0, 0, 0, 1, 1, 0, 0} );
+        REQUIRE(neighbours==expected_neighbours);
+    }
+
+    SECTION( "left edge cell's neighbours" ) {
+        auto neighbours = a.get_neighbours_state(1, 0);
+        auto expected_neighbours = std::vector<bool>( {0, 1, 0, 0, 0, 1, 0, 1} );
+        REQUIRE(neighbours==expected_neighbours);
+    }
+
+    SECTION( "right edge cell's neighbours" ) {
+        auto neighbours = a.get_neighbours_state(1, 2);
+        auto expected_neighbours = std::vector<bool>( {1, 0, 1, 0, 0, 0, 1, 0} );
+        REQUIRE(neighbours==expected_neighbours);
+    }
+
+    SECTION( "corner cell's neighbours" ) {
+        auto neighbours = a.get_neighbours_state(2, 2);
+        auto expected_neighbours = std::vector<bool>( {0, 1, 1, 1, 0, 1, 0, 0} );
+        REQUIRE(neighbours==expected_neighbours);
+    }
 }
