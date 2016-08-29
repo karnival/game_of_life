@@ -197,41 +197,73 @@ TEST_CASE( "grids update properly", "[grid]") {
         before.set_cell_state(3, 2, false);
         before.set_cell_state(3, 3, false);
 
-        Grid after(4,4);
+        auto after = before;
 
         before.update_grid();
 
-        //REQUIRE(before==after);
+        REQUIRE(before==after);
     }
 
     SECTION( "blinker should blink" ) {
-        Grid a(5,5);
+        Grid before(5,5);
 
-        a.set_cell_state(0, 0, false);
-        a.set_cell_state(0, 1, false);
-        a.set_cell_state(0, 2, false);
-        a.set_cell_state(0, 3, false);
-        a.set_cell_state(0, 4, false);
-        a.set_cell_state(1, 0, false);
-        a.set_cell_state(1, 1, false);
-        a.set_cell_state(1, 2, false);
-        a.set_cell_state(1, 3, false);
-        a.set_cell_state(1, 4, false);
-        a.set_cell_state(2, 0, false);
-        a.set_cell_state(2, 1, true);
-        a.set_cell_state(2, 2, true);
-        a.set_cell_state(2, 3, true);
-        a.set_cell_state(2, 4, false);
-        a.set_cell_state(3, 0, false);
-        a.set_cell_state(3, 1, false);
-        a.set_cell_state(3, 2, false);
-        a.set_cell_state(3, 3, false);
-        a.set_cell_state(3, 4, false);
-        a.set_cell_state(4, 0, false);
-        a.set_cell_state(4, 1, false);
-        a.set_cell_state(4, 2, false);
-        a.set_cell_state(4, 3, false);
-        a.set_cell_state(4, 4, false);
+        before.set_cell_state(0, 0, false);
+        before.set_cell_state(0, 1, false);
+        before.set_cell_state(0, 2, false);
+        before.set_cell_state(0, 3, false);
+        before.set_cell_state(0, 4, false);
+        before.set_cell_state(1, 0, false);
+        before.set_cell_state(1, 1, false);
+        before.set_cell_state(1, 2, false);
+        before.set_cell_state(1, 3, false);
+        before.set_cell_state(1, 4, false);
+        before.set_cell_state(2, 0, false);
+        before.set_cell_state(2, 1, true);
+        before.set_cell_state(2, 2, true);
+        before.set_cell_state(2, 3, true);
+        before.set_cell_state(2, 4, false);
+        before.set_cell_state(3, 0, false);
+        before.set_cell_state(3, 1, false);
+        before.set_cell_state(3, 2, false);
+        before.set_cell_state(3, 3, false);
+        before.set_cell_state(3, 4, false);
+        before.set_cell_state(4, 0, false);
+        before.set_cell_state(4, 1, false);
+        before.set_cell_state(4, 2, false);
+        before.set_cell_state(4, 3, false);
+        before.set_cell_state(4, 4, false);
+
+        Grid after(5,5);
+
+        after.set_cell_state(0, 0, false);
+        after.set_cell_state(0, 1, false);
+        after.set_cell_state(0, 2, false);
+        after.set_cell_state(0, 3, false);
+        after.set_cell_state(0, 4, false);
+        after.set_cell_state(1, 0, false);
+        after.set_cell_state(1, 1, false);
+        after.set_cell_state(1, 2, true);
+        after.set_cell_state(1, 3, false);
+        after.set_cell_state(1, 4, false);
+        after.set_cell_state(2, 0, false);
+        after.set_cell_state(2, 1, false);
+        after.set_cell_state(2, 2, true);
+        after.set_cell_state(2, 3, false);
+        after.set_cell_state(2, 4, false);
+        after.set_cell_state(3, 0, false);
+        after.set_cell_state(3, 1, false);
+        after.set_cell_state(3, 2, true);
+        after.set_cell_state(3, 3, false);
+        after.set_cell_state(3, 4, false);
+        after.set_cell_state(4, 0, false);
+        after.set_cell_state(4, 1, false);
+        after.set_cell_state(4, 2, false);
+        after.set_cell_state(4, 3, false);
+        after.set_cell_state(4, 4, false);
+
+        before.update_grid();
+
+        REQUIRE(before == after);
     }
 
     SECTION( "glider should glide" ) {
