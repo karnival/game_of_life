@@ -279,4 +279,11 @@ TEST_CASE( "data can be loaded from a file", "[util]" ) {
 }
 
 TEST_CASE( "grid can be initialised from test file", "[grid]" ) {
+    auto bool_grid = load_from_file("test_grid.txt");
+
+    Grid a(bool_grid);
+
+    REQUIRE(!a.get_cell_state(0, 0));
+    REQUIRE(!a.get_cell_state(4, 4));
+    REQUIRE(a.get_cell_state(2, 2));
 }
