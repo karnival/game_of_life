@@ -10,6 +10,9 @@ class Grid {
         Grid(int rows, int cols);
         int num_rows();
         int num_cols();
+        void update_grid();
+
+        std::vector<bool> get_neighbours_state(int row, int col);
 
     private:
         std::vector< std::vector<Cell> > GridData;
