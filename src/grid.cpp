@@ -31,6 +31,8 @@ std::vector<bool> Grid::get_neighbours_state(int row, int col) {
         neighbours[6] = GridData[row  ][col+1].is_alive();
         neighbours[7] = GridData[row+1][col+1].is_alive();
     }
+
+    return neighbours;
 }
 
 void Grid::update_grid() {
