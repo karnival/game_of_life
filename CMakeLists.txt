@@ -44,6 +44,13 @@ if (NOT ${CMAKE_VERSION} VERSION_LESS "3.1")
 endif ()
 
 ######################################################################
+# Find Boost
+######################################################################
+find_package(Boost 1.45.0 COMPONENTS filesystem program_options) 
+include_directories(${Boost_INCLUDE_DIRS}) 
+
+
+######################################################################
 # Add C++11 and OpenMP support
 ######################################################################
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -fopenmp -O3")
