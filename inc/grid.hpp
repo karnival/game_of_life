@@ -8,6 +8,9 @@
 class Grid {
     public:
         Grid(int rows, int cols);
+        bool operator==(const Grid& other);
+        bool operator!=(const Grid& other);
+
         int num_rows();
         int num_cols();
         void set_cell_state(int row, int col, bool state);

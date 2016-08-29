@@ -102,6 +102,30 @@ TEST_CASE( "grid cell-setters and cell-getters work as expected", "[grid]" ) {
     REQUIRE(b.get_cell_state(1, 0));
 }
 
+TEST_CASE( "grid equality comparison works as expected", "[grid]") {
+    Grid a(2,2);
+    Grid b(2,2);
+    Grid c(2,2);
+
+    a.set_cell_state(0, 0, false);
+    a.set_cell_state(0, 1, true);
+    a.set_cell_state(1, 0, true);
+    a.set_cell_state(1, 1, false);
+
+    b.set_cell_state(0, 0, false);
+    b.set_cell_state(0, 1, true);
+    b.set_cell_state(1, 0, true);
+    b.set_cell_state(1, 1, false);
+
+    c.set_cell_state(0, 0, true);
+    c.set_cell_state(0, 1, true);
+    c.set_cell_state(1, 0, true);
+    c.set_cell_state(1, 1, false);
+
+    REQUIRE(a == b);
+    REQUIRE(a != c);
+}
+
 TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
     Grid a(3,3);
 
@@ -149,5 +173,94 @@ TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
         auto neighbours = a.get_neighbours_state(2, 2);
         auto expected_neighbours = std::vector<bool>( {0, 1, 1, 1, 0, 1, 0, 0} );
         REQUIRE(neighbours==expected_neighbours);
+    }
+}
+
+TEST_CASE( "grids update properly", "[grid]") {
+    SECTION( "block should not change" ) {
+        Grid before(4,4);
+
+        before.set_cell_state(0, 0, false);
+        before.set_cell_state(0, 1, false);
+        before.set_cell_state(0, 2, false);
+        before.set_cell_state(0, 3, false);
+        before.set_cell_state(1, 0, false);
+        before.set_cell_state(1, 1, true);
+        before.set_cell_state(1, 2, true);
+        before.set_cell_state(1, 3, false);
+        before.set_cell_state(2, 0, false);
+        before.set_cell_state(2, 1, true);
+        before.set_cell_state(2, 2, true);
+        before.set_cell_state(2, 3, false);
+        before.set_cell_state(3, 0, false);
+        before.set_cell_state(3, 1, false);
+        before.set_cell_state(3, 2, false);
+        before.set_cell_state(3, 3, false);
+
+        Grid after(4,4);
+
+        before.update_grid();
+
+        //REQUIRE(before==after);
+    }
+
+    SECTION( "blinker should blink" ) {
+        Grid a(5,5);
+
+        a.set_cell_state(0, 0, false);
+        a.set_cell_state(0, 1, false);
+        a.set_cell_state(0, 2, false);
+        a.set_cell_state(0, 3, false);
+        a.set_cell_state(0, 4, false);
+        a.set_cell_state(1, 0, false);
+        a.set_cell_state(1, 1, false);
+        a.set_cell_state(1, 2, false);
+        a.set_cell_state(1, 3, false);
+        a.set_cell_state(1, 4, false);
+        a.set_cell_state(2, 0, false);
+        a.set_cell_state(2, 1, true);
+        a.set_cell_state(2, 2, true);
+        a.set_cell_state(2, 3, true);
+        a.set_cell_state(2, 4, false);
+        a.set_cell_state(3, 0, false);
+        a.set_cell_state(3, 1, false);
+        a.set_cell_state(3, 2, false);
+        a.set_cell_state(3, 3, false);
+        a.set_cell_state(3, 4, false);
+        a.set_cell_state(4, 0, false);
+        a.set_cell_state(4, 1, false);
+        a.set_cell_state(4, 2, false);
+        a.set_cell_state(4, 3, false);
+        a.set_cell_state(4, 4, false);
+    }
+
+    SECTION( "glider should glide" ) {
+        Grid a(5,5);
+
+        a.set_cell_state(0, 0, false);
+        a.set_cell_state(0, 1, false);
+        a.set_cell_state(0, 2, false);
+        a.set_cell_state(0, 3, false);
+        a.set_cell_state(0, 4, false);
+        a.set_cell_state(1, 0, false);
+        a.set_cell_state(1, 1, false);
+        a.set_cell_state(1, 2, false);
+        a.set_cell_state(1, 3, false);
+        a.set_cell_state(1, 4, false);
+        a.set_cell_state(2, 0, false);
+        a.set_cell_state(2, 1, false);
+        a.set_cell_state(2, 2, false);
+        a.set_cell_state(2, 3, false);
+        a.set_cell_state(2, 4, false);
+        a.set_cell_state(3, 0, false);
+        a.set_cell_state(3, 1, false);
+        a.set_cell_state(3, 2, false);
+        a.set_cell_state(3, 3, false);
+        a.set_cell_state(3, 4, false);
+        a.set_cell_state(4, 0, false);
+        a.set_cell_state(4, 1, false);
+        a.set_cell_state(4, 2, false);
+        a.set_cell_state(4, 3, false);
+        a.set_cell_state(4, 4, false);
     }
 }

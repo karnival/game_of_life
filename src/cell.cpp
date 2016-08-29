@@ -8,6 +8,10 @@ Cell::Cell() : m_alive(false) {
 Cell::Cell(bool alive) : m_alive(alive) {
 }
 
+bool Cell::operator==(const Cell& other) {
+    return m_alive == other.m_alive;
+}
+
 void Cell::die() {
     m_alive = false;
 }

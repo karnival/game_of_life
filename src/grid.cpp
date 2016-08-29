@@ -7,6 +7,22 @@
 Grid::Grid(int rows, int cols) : GridData(rows, std::vector<Cell>(cols)) {
 }
 
+bool Grid::operator==(const Grid& other) {
+    // Check equality element by element.
+    bool equal = true;
+    for(int r = 0; r < num_rows(); r++) {
+        for(int c = 0; c < num_cols(); c++) {
+             equal = equal && (GridData[r][c] == other.GridData[r][c]);
+        }
+    }
+
+    return equal;
+}
+
+bool Grid::operator!=(const Grid& other) {
+    return !(*this == other);
+}
+
 int Grid::num_rows() {
     return GridData.size();
 }
@@ -92,12 +108,7 @@ void Grid::update_grid() {
         for(int c = 0; c < cols; c++) {
             auto neighbours = Grid::get_neighbours_state(r, c);
             auto new_state = GridData[r][c].update_cell(neighbours);
-            if(new_state) {
-                next_grid[r][c].live();
-            }
-            else {
-                next_grid[r][c].die();
-            }
+            next_grid[r][c].set_cell_state(new_state);
         }
     }
 

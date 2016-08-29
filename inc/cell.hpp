@@ -8,6 +8,8 @@ class Cell {
         Cell();
         Cell(bool alive);
 
+        bool operator==(const Cell& other);
+
         void die();
         void live();
         void set_cell_state(bool state);
