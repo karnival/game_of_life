@@ -16,6 +16,15 @@ void Cell::live() {
     m_alive = true;
 }
 
+void Cell::set_cell_state(bool state) {
+    if(state) {
+        live();
+    }
+    else {
+        die();
+    }
+}
+
 bool Cell::is_alive() {
     return m_alive;
 }

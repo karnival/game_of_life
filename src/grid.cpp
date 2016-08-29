@@ -35,6 +35,14 @@ std::vector<bool> Grid::get_neighbours_state(int row, int col) {
     return neighbours;
 }
 
+void Grid::set_cell_state(int row, int col, bool state) {
+    GridData[row][col].set_cell_state(state);
+}
+
+bool Grid::get_cell_state(int row, int col) {
+    return GridData[row][col].is_alive();
+}
+
 void Grid::update_grid() {
     auto next_grid = GridData;
 

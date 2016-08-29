@@ -17,7 +17,7 @@ TEST_CASE( "cells can be killed and restored", "[cell]" ) {
         REQUIRE(!c.is_alive());
     }
 
-    SECTION( "cells can change their alive/dead state" ) {
+    SECTION( "cells can change their alive/dead state through live() and die()" ) {
         a.live();
         b.die();
         c.live();
@@ -25,6 +25,16 @@ TEST_CASE( "cells can be killed and restored", "[cell]" ) {
         REQUIRE(!b.is_alive());
         REQUIRE(c.is_alive());
     }
+
+    SECTION( "cells can also change sate through set_cell_state()" ) {
+        a.set_cell_state(true);
+        b.set_cell_state(false);
+        c.set_cell_state(true);
+        REQUIRE(a.is_alive());
+        REQUIRE(!b.is_alive());
+        REQUIRE(c.is_alive());
+    }
+
 }
 
 TEST_CASE( "individual cells update correctly", "[cell]") {
@@ -72,4 +82,26 @@ TEST_CASE( "grids can be created", "[grid]" ) {
 
     REQUIRE(a.num_rows() == 10);
     REQUIRE(a.num_cols() == 5);
+}
+
+TEST_CASE( "grid cell-setters and cell-getters work as expected", "[grid]" ) {
+    Grid a(1,1);
+
+    a.set_cell_state(0, 0, false);
+    REQUIRE(!a.get_cell_state(0, 0));
+
+    a.set_cell_state(0, 0, true);
+    REQUIRE(a.get_cell_state(0, 0));
+    
+    Grid b(2,2);
+
+    b.set_cell_state(1, 1, false);
+    REQUIRE(!b.get_cell_state(1, 1));
+
+    b.set_cell_state(1, 0, true);
+    REQUIRE(b.get_cell_state(1, 0));
+}
+
+TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
+    Grid a(3,3);
 }

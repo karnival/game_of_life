@@ -10,6 +10,7 @@ class Cell {
 
         void die();
         void live();
+        void set_cell_state(bool state);
         bool is_alive();
         bool update_cell(std::vector<bool> neighbours);
 
