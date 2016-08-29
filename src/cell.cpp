@@ -1,6 +1,6 @@
 #include <cell.hpp>
 
-Cell::Cell() : m_alive(true) {
+Cell::Cell() : m_alive(false) {
 }
 
 Cell::Cell(bool alive) : m_alive(alive) {
