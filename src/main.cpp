@@ -7,12 +7,14 @@ int main(int argc, char** argv) {
     try {
         std::string init;
         std::string out;
+        int frames;
 
         namespace opts = boost::program_options;
         opts::options_description desc("Options");
         desc.add_options()
                 ("help", "Print help message")
                 ("init", opts::value<std::string> (&init), "Initial state.")
+                ("frames", opts::value<int> (&frames), "Frames.")
                 ("out", opts::value<std::string> (&out), "Output filename.")
         ;
 
@@ -46,6 +48,10 @@ int main(int argc, char** argv) {
           
         if(vm.count("out")) {
             std::cout << "out was " << vm["out"].as<std::string>() << std::endl;
+        }
+
+        if(vm.count("frames")) {
+            std::cout << "number of frames was " << frames << std::endl;
         }
       
         if(vm.count("out")) {
