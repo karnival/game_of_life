@@ -206,7 +206,6 @@ TEST_CASE( "grids update properly", "[grid]") {
 
     SECTION( "blinker should blink" ) {
         Grid before(5,5);
-
         before.set_cell_state(0, 0, false);
         before.set_cell_state(0, 1, false);
         before.set_cell_state(0, 2, false);
@@ -233,8 +232,9 @@ TEST_CASE( "grids update properly", "[grid]") {
         before.set_cell_state(4, 3, false);
         before.set_cell_state(4, 4, false);
 
-        Grid after(5,5);
+        auto original = before;
 
+        Grid after(5,5);
         after.set_cell_state(0, 0, false);
         after.set_cell_state(0, 1, false);
         after.set_cell_state(0, 2, false);
@@ -264,5 +264,8 @@ TEST_CASE( "grids update properly", "[grid]") {
         before.update_grid();
 
         REQUIRE(before == after);
+
+        before.update_grid();
+        REQUIRE(before == original);
     }
 }
