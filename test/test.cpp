@@ -101,7 +101,3 @@ TEST_CASE( "grid cell-setters and cell-getters work as expected", "[grid]" ) {
     b.set_cell_state(1, 0, true);
     REQUIRE(b.get_cell_state(1, 0));
 }
-
-TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
-    Grid a(3,3);
-}
