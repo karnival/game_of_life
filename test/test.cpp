@@ -27,7 +27,7 @@ TEST_CASE( "cells can be killed and restored", "[cell]" ) {
     }
 }
 
-TEST_CASE( "cells update correctly", "[cell]") {
+TEST_CASE( "individual cells update correctly", "[cell]") {
     Cell dead_start(false);
     Cell alive_start(true);
 
