@@ -5,6 +5,7 @@
 
 #include <cell.hpp>
 #include <grid.hpp>
+#include <util.hpp>
 
 TEST_CASE( "cells can be killed and restored", "[cell]" ) {
     Cell a;
@@ -268,4 +269,14 @@ TEST_CASE( "grids update properly", "[grid]") {
         before.update_grid();
         REQUIRE(before == original);
     }
+}
+
+TEST_CASE( "data can be loaded from a file", "[util]" ) {
+    auto bool_grid = load_from_file("test_grid.txt");
+    REQUIRE(bool_grid[0][0] == false);
+    REQUIRE(bool_grid[4][4] == false);
+    REQUIRE(bool_grid[2][2] == true);
+}
+
+TEST_CASE( "grid can be initialised from test file", "[grid]" ) {
 }

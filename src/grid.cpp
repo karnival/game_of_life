@@ -7,6 +7,17 @@
 Grid::Grid(int rows, int cols) : GridData(rows, std::vector<Cell>(cols)) {
 }
 
+Grid::Grid(std::vector< std::vector<bool> > init) : GridData(init.size(), std::vector<Cell>( init[0].size() )) {
+    int rows = init.size();
+    int cols = init[0].size();
+
+    for(int r = 0; r < rows; r++) {
+        for(int c = 0; c < cols; c++) {
+            GridData[r][c].set_cell_state(init[r][c]);
+        }
+    }
+}
+
 bool Grid::operator==(const Grid& other) {
     // Check equality element by element.
     bool equal = true;

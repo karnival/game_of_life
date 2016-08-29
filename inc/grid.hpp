@@ -8,6 +8,7 @@
 class Grid {
     public:
         Grid(int rows, int cols);
+        Grid(std::vector< std::vector<bool> > init);
         bool operator==(const Grid& other);
         bool operator!=(const Grid& other);
 

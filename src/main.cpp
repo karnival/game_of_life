@@ -1,7 +1,9 @@
 #include <iostream>
+#include <fstream>
 #include <boost/program_options.hpp>
 
 #include <grid.hpp>
+#include <util.hpp>
 
 int main(int argc, char** argv) {
     try {
@@ -42,9 +44,15 @@ int main(int argc, char** argv) {
             return 1;                                  
         }                                                                
 
+        std::vector< std::vector<bool> > init_data;
         if(vm.count("init")) {
             std::cout << "init was " << vm["init"].as<std::string>() << std::endl;
+            init_data = load_from_file(init);
         }
+        else {
+        }
+
+        Grid g(init_data);
           
         if(vm.count("out")) {
             std::cout << "out was " << vm["out"].as<std::string>() << std::endl;
