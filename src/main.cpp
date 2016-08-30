@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <boost/program_options.hpp>
 
@@ -75,7 +76,9 @@ int main(int argc, char** argv) {
             g.update_grid();
 
             if(vm.count("out")) {
-                g.write_to_file(out + std::to_string(i));
+                std::stringstream out_string;
+                out_string << std::setw(6) << std::setfill('0') << std::to_string(i);
+                g.write_to_file(out + out_string.str());
             }
         }
       
