@@ -25,4 +25,3 @@ std::vector< std::vector<bool> > load_from_file(std::string filename) {
 
     return data;
 }
-

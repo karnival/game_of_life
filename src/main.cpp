@@ -60,6 +60,14 @@ int main(int argc, char** argv) {
 
         if(vm.count("frames")) {
             std::cout << "number of frames was " << frames << std::endl;
+        } else {
+            std::cout << "defaulting to 10 frames" << std::endl;
+            frames = 10;
+        }
+
+        for(int i = 0; i < frames; i++) {
+            g.update_grid();
+            g.write_to_file(out + std::to_string(i));
         }
       
         if(vm.count("out")) {

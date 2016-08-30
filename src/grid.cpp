@@ -1,6 +1,9 @@
 #include <vector>
 #include <exception>
 #include <iostream>
+#include <string>
+#include <fstream>
+#include <sstream>
 
 #include <grid.hpp>
 
@@ -41,6 +44,22 @@ int Grid::num_rows() {
 int Grid::num_cols() {
     return GridData[0].size();
 }
+
+std::vector< std::vector<bool> > Grid::get_grid_data() {
+    int rows = GridData.size();
+    int cols = GridData[0].size();
+
+    std::vector< std::vector<bool> > bool_matrix(rows, std::vector<bool>(cols));
+
+    for(int r = 0; r < rows; r++) {
+        for(int c = 0; c < cols; c++) {
+            bool_matrix[r][c] = GridData[r][c].is_alive();
+        }
+    }
+
+    return bool_matrix;
+}
+
 
 std::vector<bool> Grid::get_neighbours_state(int row, int col) {
     auto rows = num_rows();
@@ -124,4 +143,18 @@ void Grid::update_grid() {
     }
 
     GridData = next_grid;
+}
+
+void Grid::write_to_file(std::string filename) {
+    std::ofstream outfile;
+    outfile.open(filename);
+    std::ostream_iterator<bool> out_it(outfile, " ");
+
+    auto bool_matrix = get_grid_data();
+
+    for(int i = 0; i < bool_matrix.size(); i++) {
+        copy(bool_matrix.at(i).begin(), bool_matrix.at(i).end(), out_it);
+        outfile << std::endl;
+    }
+    outfile.close();
 }
