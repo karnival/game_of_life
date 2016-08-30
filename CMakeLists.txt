@@ -58,7 +58,6 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -fopenmp -O3")
 ######################################################################
 # Setup the path to load CMake macros, and extra CMake files.
 ######################################################################
-configure_file(${CMAKE_SOURCE_DIR}/cmake/FindEigen.cmake ${CMAKE_BINARY_DIR}/FindEigen.cmake @ONLY)
 set(CMAKE_MODULE_PATH
     ${CMAKE_BINARY_DIR}
     ${CMAKE_SOURCE_DIR}/cmake
