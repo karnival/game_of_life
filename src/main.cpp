@@ -50,12 +50,18 @@ int main(int argc, char** argv) {
             init_data = load_from_file(init);
         }
         else {
+            init_data.push_back({0, 0, 0});
+            init_data.push_back({0, 0, 0});
+            init_data.push_back({0, 0, 0});
         }
 
         Grid g(init_data);
           
         if(vm.count("out")) {
             std::cout << "out was " << vm["out"].as<std::string>() << std::endl;
+        }
+        else {
+            std::cout << "Not saving output because --out was not specified." << std::endl;
         }
 
         if(vm.count("frames")) {
@@ -67,12 +73,12 @@ int main(int argc, char** argv) {
 
         for(int i = 0; i < frames; i++) {
             g.update_grid();
-            g.write_to_file(out + std::to_string(i));
+
+            if(vm.count("out")) {
+                g.write_to_file(out + std::to_string(i));
+            }
         }
       
-        if(vm.count("out")) {
-        }
-
     } catch(std::exception& e) {
         std::cerr << "Unhandled Exception reached the top of main: " 
                   << e.what() << ", application will now exit" << std::endl; 
