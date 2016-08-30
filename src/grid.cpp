@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
+#include <iterator>
 
 #include <grid.hpp>
 
