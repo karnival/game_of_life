@@ -72,12 +72,19 @@ int main(int argc, char** argv) {
             frames = 10;
         }
 
+        // Find out necessary padding width -- i.e. max number of digits used.
+        std::stringstream counting_stream;
+        counting_stream << frames-1;
+        auto padding_width = counting_stream.str().size();
+
         for(int i = 0; i < frames; i++) {
             g.update_grid();
 
             if(vm.count("out")) {
+                // Pad number
                 std::stringstream out_string;
-                out_string << std::setw(6) << std::setfill('0') << std::to_string(i);
+                out_string << std::setw(padding_width) << std::setfill('0') << std::to_string(i);
+
                 g.write_to_file(out + out_string.str());
             }
         }
