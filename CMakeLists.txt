@@ -87,5 +87,5 @@ include_directories(inc)
 ######################################################################
 # Decide what subdirectories we are building, and go and build them.
 ######################################################################
-add_subdirectory(src)
+add_subdirectory(src bin)
 add_subdirectory(test)
