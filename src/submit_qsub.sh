@@ -25,5 +25,5 @@ if [[ -z $log|| -z $out_file || -z $init_file ]]; then
   echo 'Need to set -l (log location), -o (output location) and -i (initialisation file)'
   exit 1
 else
-  qsub -l h_rt=00:20:00 -N game_of_life -o "$log"_stdout -e "$log"_stderr -l tmem=1.8G -l h_vmem=1.8G -j y -S /bin/bash -b y -cwd -V game_of_life --init "$init_file" --out "$out_file" --frames 100
+  qsub -l h_rt=00:20:00 -N game_of_life -o "$log"_stdout -e "$log"_stderr -l tmem=1.8G -l h_vmem=1.8G -j y -S /bin/bash -b y -cwd -V ./game_of_life --init "$init_file" --out "$out_file" --frames 100
 fi
