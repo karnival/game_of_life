@@ -1,4 +1,5 @@
 #include <vector>
+#include <chrono>
 #include <array>
 #include <exception>
 #include <iostream>
@@ -145,6 +146,8 @@ void Grid::update_grid() {
     auto rows = num_rows();
     auto cols = num_cols();
 
+    auto start = std::chrono::steady_clock::now();
+
     #pragma omp parallel shared(next_grid)
     {
         #pragma omp for
@@ -157,7 +160,18 @@ void Grid::update_grid() {
         }
     }
 
+    auto end = std::chrono::steady_clock::now();
+
+    auto diff = end - start;
+
+    std::cout << "update took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
+
+    start = std::chrono::steady_clock::now();
     GridData = next_grid;
+    end = std::chrono::steady_clock::now();
+
+    diff = end - start;
+    std::cout << "swap took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
 }
 
 void Grid::write_to_file(std::string filename) {

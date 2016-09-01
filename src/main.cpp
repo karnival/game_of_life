@@ -1,3 +1,4 @@
+#include <chrono>
 #include <iostream>
 #include <iomanip>
 #include <fstream>
@@ -48,7 +49,11 @@ int main(int argc, char** argv) {
         std::vector< std::vector<bool> > init_data;
         if(vm.count("init")) {
             std::cout << "init was " << vm["init"].as<std::string>() << std::endl;
+            auto start = std::chrono::steady_clock::now();
             init_data = load_from_file(init);
+            auto end = std::chrono::steady_clock::now();
+            auto diff = end - start;
+            std::cout << "init took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
         }
         else {
             init_data.push_back({0, 0, 0});
@@ -56,7 +61,11 @@ int main(int argc, char** argv) {
             init_data.push_back({0, 0, 0});
         }
 
+        auto start = std::chrono::steady_clock::now();
         Grid g(init_data);
+        auto end = std::chrono::steady_clock::now();
+        auto diff = end - start;
+        std::cout << "constructor took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
           
         if(vm.count("out")) {
             std::cout << "out was " << vm["out"].as<std::string>() << std::endl;
@@ -85,7 +94,11 @@ int main(int argc, char** argv) {
                 std::stringstream out_string;
                 out_string << std::setw(padding_width) << std::setfill('0') << std::to_string(i);
 
+                auto start_fw = std::chrono::steady_clock::now();
                 g.write_to_file(out + out_string.str());
+                auto end_fw = std::chrono::steady_clock::now();
+                auto diff_fw = end_fw - start_fw;
+                std::cout << "file write took " << std::chrono::duration<double,std::milli> (diff_fw).count() << " ms" << std::endl;
             }
         }
       
