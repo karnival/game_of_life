@@ -9,7 +9,9 @@
 #include <algorithm>
 #include <iterator>
 
-#include <omp.h>
+#if defined(_OPENMP)
+    #include <omp.h>
+#endif
 
 #include <grid.hpp>
 
@@ -148,9 +150,15 @@ void Grid::update_grid() {
 
     auto start = std::chrono::steady_clock::now();
 
-    #pragma omp parallel shared(next_grid)
+    #if defined(_OPENMP)
+        #pragma omp parallel shared(next_grid)
+    #endif
+
     {
-        #pragma omp for
+        #if defined(_OPENMP)
+            #pragma omp for
+        #endif
+
         for(int r = 0; r < rows; r++) {
             for(int c = 0; c < cols; c++) {
                 auto num_neighbours = get_num_neighbours(r, c);
@@ -166,12 +174,7 @@ void Grid::update_grid() {
 
     std::cout << "update took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
 
-    start = std::chrono::steady_clock::now();
     GridData = next_grid;
-    end = std::chrono::steady_clock::now();
-
-    diff = end - start;
-    std::cout << "swap took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
 }
 
 void Grid::write_to_file(std::string filename) {

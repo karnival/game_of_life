@@ -2,6 +2,7 @@
 #include "catch.hpp"
 
 #include <vector>
+#include <array>
 
 #include <cell.hpp>
 #include <grid.hpp>
@@ -38,45 +39,45 @@ TEST_CASE( "cells can be killed and restored", "[cell]" ) {
 
 }
 
-/*TEST_CASE( "individual cells update correctly", "[cell]") {
+TEST_CASE( "individual cells update correctly", "[cell]") {
     Cell dead_start(false);
     Cell alive_start(true);
 
     SECTION( "zero neighbours" ) {
-        auto neighbours = std::vector<bool> { false, false, false, false, false, false, false, false };
+        int neighbours = 0;
 
         REQUIRE(!dead_start.update_cell(neighbours));
         REQUIRE(!alive_start.update_cell(neighbours));
     }
 
     SECTION( "one neighbour" ) {
-        auto neighbours = std::vector<bool> { true , false, false, false, false, false, false, false };
+        int neighbours = 1;
 
         REQUIRE(!dead_start.update_cell(neighbours));
         REQUIRE(!alive_start.update_cell(neighbours));
     }
 
     SECTION( "two neighbours" ) {
-        auto neighbours = std::vector<bool> { true , true,  false, false, false, false, false, false };
+        int neighbours = 2;
 
         REQUIRE(!dead_start.update_cell(neighbours));
         REQUIRE(alive_start.update_cell(neighbours));
     }
 
     SECTION( "three neighbours" ) {
-        auto neighbours = std::vector<bool> { true , true,  true, false, false, false, false, false };
+        int neighbours = 3;
 
         REQUIRE(dead_start.update_cell(neighbours));
         REQUIRE(alive_start.update_cell(neighbours));
     }
 
     SECTION( "four neighbours" ) {
-        auto neighbours = std::vector<bool> { true , true,  true , true , false, false, false, false };
+        int neighbours = 4;
 
         REQUIRE(!dead_start.update_cell(neighbours));
         REQUIRE(!alive_start.update_cell(neighbours));
     }
-}*/
+}
 
 TEST_CASE( "grids can be created", "[grid]" ) {
     Grid a(10,5);
@@ -127,7 +128,7 @@ TEST_CASE( "grid equality comparison works as expected", "[grid]") {
     REQUIRE(a != c);
 }
 
-/*TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
+TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
     Grid a(3,3);
 
     a.set_cell_state(0, 0, false);
@@ -142,40 +143,40 @@ TEST_CASE( "grid equality comparison works as expected", "[grid]") {
 
     SECTION( "middle cell's neighbours" ) {
         auto neighbours = a.get_neighbours_state(1, 1);
-        auto expected_neighbours = std::vector<bool>( {0, 1, 0, 1, 1, 0, 1, 0} );
+        auto expected_neighbours = std::array<bool,8>( {0, 1, 0, 1, 1, 0, 1, 0} );
         REQUIRE(neighbours==expected_neighbours);
     }
 
     SECTION( "low edge cell's neighbours" ) {
         auto neighbours = a.get_neighbours_state(0, 1);
-        auto expected_neighbours = std::vector<bool>( {0, 0, 1, 1, 0, 0, 0, 1} );
+        auto expected_neighbours = std::array<bool,8>( {0, 0, 1, 1, 0, 0, 0, 1} );
         REQUIRE(neighbours==expected_neighbours);
     }
 
     SECTION( "high edge cell's neighbours" ) {
         auto neighbours = a.get_neighbours_state(2, 1);
-        auto expected_neighbours = std::vector<bool>( {1, 0, 0, 0, 1, 1, 0, 0} );
+        auto expected_neighbours = std::array<bool,8>( {1, 0, 0, 0, 1, 1, 0, 0} );
         REQUIRE(neighbours==expected_neighbours);
     }
 
     SECTION( "left edge cell's neighbours" ) {
         auto neighbours = a.get_neighbours_state(1, 0);
-        auto expected_neighbours = std::vector<bool>( {0, 1, 0, 0, 0, 1, 0, 1} );
+        auto expected_neighbours = std::array<bool,8>( {0, 1, 0, 0, 0, 1, 0, 1} );
         REQUIRE(neighbours==expected_neighbours);
     }
 
     SECTION( "right edge cell's neighbours" ) {
         auto neighbours = a.get_neighbours_state(1, 2);
-        auto expected_neighbours = std::vector<bool>( {1, 0, 1, 0, 0, 0, 1, 0} );
+        auto expected_neighbours = std::array<bool,8>( {1, 0, 1, 0, 0, 0, 1, 0} );
         REQUIRE(neighbours==expected_neighbours);
     }
 
     SECTION( "corner cell's neighbours" ) {
         auto neighbours = a.get_neighbours_state(2, 2);
-        auto expected_neighbours = std::vector<bool>( {0, 1, 1, 1, 0, 1, 0, 0} );
+        auto expected_neighbours = std::array<bool,8>( {0, 1, 1, 1, 0, 1, 0, 0} );
         REQUIRE(neighbours==expected_neighbours);
     }
-}*/
+}
 
 TEST_CASE( "grids update properly", "[grid]") {
     SECTION( "block should not change" ) {
