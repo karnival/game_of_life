@@ -2,6 +2,7 @@
 #define GRID_H
 
 #include <vector>
+#include <array>
 #include <string>
 
 #include <cell.hpp>
@@ -19,7 +20,7 @@ class Grid {
         bool get_cell_state(int row, int col);
         void update_grid();
 
-        bool* get_neighbours_state(int row, int col);
+        std::array<bool,8> get_neighbours_state(int row, int col);
         int get_num_neighbours(int row, int col);
 
         void write_to_file(std::string filename);

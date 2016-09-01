@@ -1,4 +1,5 @@
 #include <vector>
+#include <array>
 #include <exception>
 #include <iostream>
 #include <string>
@@ -64,7 +65,7 @@ std::vector< std::vector<bool> > Grid::get_grid_data() {
     return bool_matrix;
 }
 
-bool* Grid::get_neighbours_state(int row, int col) {
+std::array<bool,8> Grid::get_neighbours_state(int row, int col) {
     auto rows = num_rows();
     auto cols = num_cols();
 
@@ -107,7 +108,7 @@ bool* Grid::get_neighbours_state(int row, int col) {
         throw std::exception();
     }
 
-    bool* neighbours = new bool[8];
+    std::array<bool,8> neighbours;
 
     neighbours[0] = GridData[row_dec][col_dec].is_alive();
     neighbours[1] = GridData[row  ][col_dec].is_alive();
@@ -125,7 +126,7 @@ bool* Grid::get_neighbours_state(int row, int col) {
 
 int Grid::get_num_neighbours(int row, int col) {
     auto neighbours = get_neighbours_state(row, col);
-    auto neighbours_alive = std::count(neighbours, neighbours+8, true);
+    auto neighbours_alive = std::count(neighbours.begin(), neighbours.end(), true);
     return neighbours_alive;
 
 }
