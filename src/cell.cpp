@@ -34,9 +34,7 @@ bool Cell::is_alive() {
     return m_alive;
 }
 
-bool Cell::update_cell(std::vector<bool> neighbours) {
-    auto neighbours_alive = std::count(neighbours.begin(), neighbours.end(), true);
-
+bool Cell::update_cell(int neighbours_alive) {
     if(m_alive){
         if(neighbours_alive < 2) { // underpopulation
             return false;

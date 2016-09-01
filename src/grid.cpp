@@ -64,8 +64,7 @@ std::vector< std::vector<bool> > Grid::get_grid_data() {
     return bool_matrix;
 }
 
-
-std::vector<bool> Grid::get_neighbours_state(int row, int col) {
+bool* Grid::get_neighbours_state(int row, int col) {
     auto rows = num_rows();
     auto cols = num_cols();
 
@@ -108,7 +107,8 @@ std::vector<bool> Grid::get_neighbours_state(int row, int col) {
         throw std::exception();
     }
 
-    auto neighbours = std::vector<bool>(8, 0); 
+    bool* neighbours = new bool[8];
+
     neighbours[0] = GridData[row_dec][col_dec].is_alive();
     neighbours[1] = GridData[row  ][col_dec].is_alive();
     neighbours[2] = GridData[row_inc][col_dec].is_alive();
@@ -120,8 +120,14 @@ std::vector<bool> Grid::get_neighbours_state(int row, int col) {
     neighbours[6] = GridData[row  ][col_inc].is_alive();
     neighbours[7] = GridData[row_inc][col_inc].is_alive();
 
-
     return neighbours;
+}
+
+int Grid::get_num_neighbours(int row, int col) {
+    auto neighbours = get_neighbours_state(row, col);
+    auto neighbours_alive = std::count(neighbours, neighbours+8, true);
+    return neighbours_alive;
+
 }
 
 void Grid::set_cell_state(int row, int col, bool state) {
@@ -138,12 +144,13 @@ void Grid::update_grid() {
     auto rows = num_rows();
     auto cols = num_cols();
 
-    #pragma omp master
+    #pragma omp parallel shared(next_grid)
     {
+        #pragma omp for
         for(int r = 0; r < rows; r++) {
             for(int c = 0; c < cols; c++) {
-                auto neighbours = Grid::get_neighbours_state(r, c);
-                auto new_state = GridData[r][c].update_cell(neighbours);
+                auto num_neighbours = get_num_neighbours(r, c);
+                auto new_state = GridData[r][c].update_cell(num_neighbours);
                 next_grid[r][c].set_cell_state(new_state);
             }
         }

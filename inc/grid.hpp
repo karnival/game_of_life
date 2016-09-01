@@ -19,7 +19,8 @@ class Grid {
         bool get_cell_state(int row, int col);
         void update_grid();
 
-        std::vector<bool> get_neighbours_state(int row, int col);
+        bool* get_neighbours_state(int row, int col);
+        int get_num_neighbours(int row, int col);
 
         void write_to_file(std::string filename);
         std::vector< std::vector<bool> > get_grid_data();

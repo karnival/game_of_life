@@ -38,7 +38,7 @@ TEST_CASE( "cells can be killed and restored", "[cell]" ) {
 
 }
 
-TEST_CASE( "individual cells update correctly", "[cell]") {
+/*TEST_CASE( "individual cells update correctly", "[cell]") {
     Cell dead_start(false);
     Cell alive_start(true);
 
@@ -76,7 +76,7 @@ TEST_CASE( "individual cells update correctly", "[cell]") {
         REQUIRE(!dead_start.update_cell(neighbours));
         REQUIRE(!alive_start.update_cell(neighbours));
     }
-}
+}*/
 
 TEST_CASE( "grids can be created", "[grid]" ) {
     Grid a(10,5);
@@ -127,7 +127,7 @@ TEST_CASE( "grid equality comparison works as expected", "[grid]") {
     REQUIRE(a != c);
 }
 
-TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
+/*TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
     Grid a(3,3);
 
     a.set_cell_state(0, 0, false);
@@ -175,7 +175,7 @@ TEST_CASE( "grids permit looking up cell neighbours", "[grid]") {
         auto expected_neighbours = std::vector<bool>( {0, 1, 1, 1, 0, 1, 0, 0} );
         REQUIRE(neighbours==expected_neighbours);
     }
-}
+}*/
 
 TEST_CASE( "grids update properly", "[grid]") {
     SECTION( "block should not change" ) {
