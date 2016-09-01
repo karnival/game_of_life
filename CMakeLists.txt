@@ -53,6 +53,14 @@ include_directories(${Boost_INCLUDE_DIRS})
 ######################################################################
 # Add C++11 and OpenMP support
 ######################################################################
+
+# Set compiler to gcc for OSX -- necessary for OpenMP.
+# Make sure to link against Boost compiled with gcc, not clang.
+if(APPLE)
+  SET(CMAKE_C_COMPILER g++-5)
+  SET(CMAKE_CXX_COMPILER g++-5)
+endif()
+
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -fopenmp -O3")
 
 ######################################################################

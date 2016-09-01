@@ -7,6 +7,8 @@
 #include <algorithm>
 #include <iterator>
 
+#include <omp.h>
+
 #include <grid.hpp>
 
 Grid::Grid(int rows, int cols) : GridData(rows, std::vector<Cell>(cols)) {
@@ -136,11 +138,14 @@ void Grid::update_grid() {
     auto rows = num_rows();
     auto cols = num_cols();
 
-    for(int r = 0; r < rows; r++) {
-        for(int c = 0; c < cols; c++) {
-            auto neighbours = Grid::get_neighbours_state(r, c);
-            auto new_state = GridData[r][c].update_cell(neighbours);
-            next_grid[r][c].set_cell_state(new_state);
+    #pragma omp master
+    {
+        for(int r = 0; r < rows; r++) {
+            for(int c = 0; c < cols; c++) {
+                auto neighbours = Grid::get_neighbours_state(r, c);
+                auto new_state = GridData[r][c].update_cell(neighbours);
+                next_grid[r][c].set_cell_state(new_state);
+            }
         }
     }
 
