@@ -52,3 +52,7 @@ ssh username@server
 `run_remote.sh` submits an example job using the deployed version of `submit_qsub.sh`.
 
 Once the cluster job has finished, call `fetch_results.sh` to retrieve the output data.
+
+## Visualisation of Results
+
+Call the MATLAB script 'visualise_from_data.m' within the directory containing the results. This generates an output video.
