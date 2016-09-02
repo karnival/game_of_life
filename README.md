@@ -10,32 +10,32 @@ On some platforms, it is necessary to set CMAKE_INCLUDE_PATH and CMAKE_LIBRARY_P
 
 In-source or out-of-source:
 
-` mkdir build
-  cd build
-  cmake path/to/source
-  make `
+```mkdir build
+cd build
+cmake path/to/source
+make```
 
 ## Tests
 
 Implemented using Catch. Tests are fairly self-explanatory.
 
-` cd /path/to/build/test
-  ./test `
+```cd /path/to/build/test
+./test```
 
 ## Local Execution
 
-` cd /path/to/build/bin
-  ./game_of_life --frames [number of iterations to simulate] --out [output path and prefix, e.g. preexisting_output_dir/outprefix-] --init [initialisation data] `
+```cd /path/to/build/bin
+./game_of_life --frames [number of iterations to simulate] --out [output path and prefix, e.g. preexisting_output_dir/outprefix-] --init [initialisation data]```
 
 For example:
 
-` ./game_of_life --frames 2 --out output/big_output_ --init ../test/test_grid_1024.txt `
+```./game_of_life --frames 2 --out output/big_output_ --init ../test/test_grid_1024.txt```
 
 ## Remote Deployment/Execution
 
 Remote deployment/execution is done using ssh, for systems set up with the Sun Grid Engine (qsub job submission). First, edit /path/to/build/bin/connect_ssh.sh to be have the form:
 
-` ssh username@server `
+```ssh username@server```
 
 `deploy.sh` deploys to that server and builds the project. `run_remote.sh` submits an example job using the deployed version of `submit_qsub.sh`.
 
