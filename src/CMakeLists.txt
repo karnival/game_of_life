@@ -4,4 +4,5 @@ configure_file(submit_qsub.sh ${CMAKE_CURRENT_BINARY_DIR}/submit_qsub.sh COPYONL
 configure_file(deploy.sh ${CMAKE_CURRENT_BINARY_DIR}/deploy.sh COPYONLY)
 configure_file(fetch_results.sh ${CMAKE_CURRENT_BINARY_DIR}/fetch_results.sh COPYONLY)
 configure_file(run_remote.sh ${CMAKE_CURRENT_BINARY_DIR}/run_remote.sh COPYONLY)
+configure_file(connect_ssh.sh ${CMAKE_CURRENT_BINARY_DIR}/run_remote.sh COPYONLY)
 configure_file(visualise_from_data.m ${CMAKE_CURRENT_BINARY_DIR}/visualise_from_data.m COPYONLY)
