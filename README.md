@@ -47,6 +47,8 @@ Remote deployment/execution is done using ssh, for systems set up with the Sun G
 ssh username@server
 ```
 
-`deploy.sh` deploys to that server and builds the project. `run_remote.sh` submits an example job using the deployed version of `submit_qsub.sh`.
+`deploy.sh` deploys to that server and builds the project. Note that it may be necessary to change the git remote URI used in `deploy.sh` -- this project is not currently public.
+
+`run_remote.sh` submits an example job using the deployed version of `submit_qsub.sh`.
 
 Once the cluster job has finished, call `fetch_results.sh` to retrieve the output data.
