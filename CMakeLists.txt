@@ -61,7 +61,7 @@ if(APPLE)
   SET(CMAKE_CXX_COMPILER g++-5)
 endif()
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -fopenmp -O3")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -O3")
 
 ######################################################################
 # Setup the path to load CMake macros, and extra CMake files.

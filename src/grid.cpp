@@ -148,10 +148,13 @@ void Grid::update_grid() {
     auto rows = num_rows();
     auto cols = num_cols();
 
+    // OpenMP parallelisation performance measurement.
+    int num_threads = 1;
     auto start = std::chrono::steady_clock::now();
 
     #if defined(_OPENMP)
         #pragma omp parallel shared(next_grid)
+        num_threads = omp_get_num_threads();
     #endif
 
     {
@@ -172,7 +175,7 @@ void Grid::update_grid() {
 
     auto diff = end - start;
 
-    std::cout << "update took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
+    std::cout << "with " << num_threads << " thread(s), update took " << std::chrono::duration<double,std::milli> (diff).count() << " ms" << std::endl;
 
     GridData = next_grid;
 }
