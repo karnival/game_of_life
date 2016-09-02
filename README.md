@@ -10,22 +10,22 @@ On some platforms, it is necessary to set CMAKE_INCLUDE_PATH and CMAKE_LIBRARY_P
 
 In-source or out-of-source:
 
-` mkdir build `
-` cd build `
-` cmake path/to/source `
-` make `
+` mkdir build
+  cd build
+  cmake path/to/source
+  make `
 
 ## Tests
 
 Implemented using Catch. Tests are fairly self-explanatory.
 
-` cd /path/to/build/test `
-` ./test `
+` cd /path/to/build/test
+  ./test `
 
 ## Local Execution
 
-` cd /path/to/build/bin `
-` ./game_of_life --frames [number of iterations to simulate] --out [output path and prefix, e.g. preexisting_output_dir/outprefix-] --init [initialisation data] `
+` cd /path/to/build/bin
+  ./game_of_life --frames [number of iterations to simulate] --out [output path and prefix, e.g. preexisting_output_dir/outprefix-] --init [initialisation data] `
 
 For example:
 
