@@ -154,14 +154,12 @@ void Grid::update_grid() {
 
     #if defined(_OPENMP)
         #pragma omp parallel shared(next_grid)
-        num_threads = omp_get_num_threads();
     #endif
-
     {
         #if defined(_OPENMP)
+            num_threads = omp_get_num_threads();
             #pragma omp for
         #endif
-
         for(int r = 0; r < rows; r++) {
             for(int c = 0; c < cols; c++) {
                 auto num_neighbours = get_num_neighbours(r, c);
