@@ -53,7 +53,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 ######################################################################
 # Add C++11 and OpenMP support
 ######################################################################
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -fopenmp -O3")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11 -O3")
 
 ######################################################################
 # Setup the path to load CMake macros, and extra CMake files.
